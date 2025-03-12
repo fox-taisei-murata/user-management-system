@@ -4,7 +4,8 @@ import { User } from '../types/User';
 export const fetchUsers = async (): Promise<User[]> => {
   const { data, error } = await supabase
     .from<'dev_users', User>('dev_users') // テーブル名と型を2つ指定
-    .select('*');
+    .select('*')
+    .eq('deleted', false); //  削除済みユーザーを除外
 
   if (error) {
     throw error;
@@ -63,6 +64,19 @@ export const deleteUser = async (id: number): Promise<void> => {
     .from('dev_users')
     .delete()
     .eq('id', id);
+
+  if (error) {
+    throw error;
+  }
+};
+
+export const softDeleteUser = async (userId: string): Promise<void> => {
+  const { error } = await supabase
+    .from('dev_users')
+    .update({ deleted: true })
+    .eq('id', userId)
+    .select('*')
+    .single();
 
   if (error) {
     throw error;
