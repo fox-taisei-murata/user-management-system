@@ -30,3 +30,5 @@ const UserDetails: React.FC<UserDetailsProps> = ({ user }) => {
         </Card>
     );
 };
+
+export default UserDetails
