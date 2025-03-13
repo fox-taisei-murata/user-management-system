@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 import { softDeleteUser } from "../utils/api";
 import { useState } from "react";
 import CustomButton from '@/components/parts/CustomButton';
+import CustomModal from '@/components/parts/CustomModal';
 
 
 interface DeleteUserButtonProps {
@@ -14,12 +15,13 @@ interface DeleteUserButtonProps {
 
 const DeleteUserButton: React.FC<DeleteUserButtonProps> = ({ userId, onDelete }) => {
 
+  const [openModal, setOpenModal] = useState(false);
+
   const handleDelete = async () => {
-    if (!confirm('本当にこのユーザーを削除しますか？')) return;
 
     try {
-      await softDeleteUser(userId.toString()); 
-      onDelete(userId); 
+      await softDeleteUser(userId.toString());
+      onDelete(userId);
     } catch (error) {
       console.error('削除に失敗しました', error);
       alert('削除に失敗しました');
@@ -27,9 +29,19 @@ const DeleteUserButton: React.FC<DeleteUserButtonProps> = ({ userId, onDelete })
   };
 
   return (
-    <CustomButton  onClick={handleDelete} >
-      削除
-    </CustomButton>
+    <>
+      <CustomButton onClick={() => setOpenModal(true)}>
+        削除
+      </CustomButton>
+
+      <CustomModal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        onConfirm={handleDelete}
+        title="削除確認"
+        content = "本当にこのユーザーを削除しますか？"
+      />
+    </>
   );
 };
 
