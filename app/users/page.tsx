@@ -16,7 +16,6 @@ const UsersPage: React.FC = () => {
     const getUsers = async () => {
       try {
         const data = await fetchUsers();
-        console.log(data);
         setUsers(data);
       } catch (err) {
         setError('ユーザーの取得に失敗しました。' + err);
@@ -28,9 +27,9 @@ const UsersPage: React.FC = () => {
     getUsers();
   }, []);
 
-  if (loading) {
-    return <CircularProgress />;
-  }
+  // if (loading) {
+  //   return <CircularProgress />;
+  // }
 
   if (error) {
     return <Alert severity="error">{error}</Alert>;
@@ -38,7 +37,7 @@ const UsersPage: React.FC = () => {
 
   return (
     <Box>
-      <UserList users={users} />
+      <UserList users={users} setUsers={setUsers} />
     </Box>
   );
 }

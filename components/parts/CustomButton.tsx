@@ -1,33 +1,35 @@
-// components/parts/CustomButton.tsx
-
-import React from 'react';
-import { Button, ButtonProps } from '@mui/material';
-
+import { Button, ButtonProps, SxProps } from "@mui/material";
+import React from "react";
 interface CustomButtonProps extends ButtonProps {
-    variantType?: 'primary' | 'secondary' | 'danger';
+  variantType?: "primary" | "secondary" | "danger" | "gradation";
 }
-
-
-const CustomButton: React.FC<CustomButtonProps> = ({ variantType = 'primary', ...props }) => {
-    let color: ButtonProps['color'] = 'primary';
-
-    // TODO: variantTypeに応じてcolorを変化させる
-    // colorに設定する色は調べて実装する
-
-    if (variantType === 'primary') {
-        color = 'primary';  
-    } else if (variantType === 'secondary') {
-        color = 'secondary'; 
-    } else if (variantType === 'danger') {
-        color = 'error'; 
-    }
-    
-
-
-    return (
-        <Button color={color} variant="contained" {...props} >{props.children} </Button>
-    );  // TODO: <Button>の実装
-    // プロップスには[color][variant]を設定し、{...props}を最後に設定する
-}
-
+const CustomButton: React.FC<CustomButtonProps> = ({
+  variantType = "primary",
+  ...props
+}) => {
+  let color: ButtonProps["color"] = "primary";
+  let customSx: SxProps = {};
+  switch (variantType) {
+    case "secondary":
+      color = "secondary";
+      break;
+    case "danger":
+      color = "error";
+      break;
+    case "gradation":
+      color = "primary";
+      customSx = {
+        background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+        boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+        color: "white",
+      };
+    default:
+      color = "primary";
+  }
+  return (
+    <Button color={color} variant="contained" sx={{ ...customSx }} {...props}>
+      {props.children}
+    </Button>
+  );
+};
 export default CustomButton;

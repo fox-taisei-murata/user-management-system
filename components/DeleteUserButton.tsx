@@ -4,6 +4,8 @@ import React from "react";
 import { Button } from "@mui/material";
 import { softDeleteUser } from "../utils/api";
 import { useState } from "react";
+import CustomButton from '@/components/parts/CustomButton';
+
 
 interface DeleteUserButtonProps {
   userId: number;
@@ -25,9 +27,9 @@ const DeleteUserButton: React.FC<DeleteUserButtonProps> = ({ userId, onDelete })
   };
 
   return (
-    <Button  onClick={handleDelete} >
+    <CustomButton  onClick={handleDelete} >
       削除
-    </Button>
+    </CustomButton>
   );
 };
 
