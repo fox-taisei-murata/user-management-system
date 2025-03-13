@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import UserCard from "./UserCard";
 import { User } from "../types/User";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Button } from "@mui/material";
+import CustomCard from "../components/parts/CustomCard";
+import DeleteUserButton from "./DeleteUserButton";
 
 interface UserListProps {
     users: User[];
@@ -20,7 +22,28 @@ const UserList: React.FC<UserListProps> = ({ users, setUsers }) => {
                 ユーザー一覧
             </Typography>
             {users.map(user => (
-                <UserCard key={user.id} user={user} onUserDeleted={handleDelete} />
+                <CustomCard
+                    key={user.id}
+                    title={user.name}
+                    description={user.email}
+                    actions={
+                        <>
+                            <Button
+                                variant="outlined"
+                                href={`/users/${user.id}/details`}
+                            >
+                                詳細
+                            </Button>
+                            <Button
+                                variant="outlined"
+                                href={`/users/${user.id}/edit`}
+                            >
+                                編集
+                            </Button>
+                            <DeleteUserButton userId={user.id} onDelete={handleDelete} />
+                        </>
+                    }
+                />
             ))}
         </Box>
     )
