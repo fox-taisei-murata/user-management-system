@@ -8,15 +8,17 @@ interface CustomCardProps {
     title: string;
     description: string;
     actions?: React.ReactNode;
+    bgColor?: string;
 }
 
 const CustomCard: React.FC<CustomCardProps> = ({
   title,
   description,
   actions,
+  bgColor = "#ffffff",
 }) => {
   return (
-    <Card sx={{ minWidth: 275, mb: 2 }}>
+    <Card sx={{ minWidth: 275, mb: 2, backgroundColor: bgColor }}>
       <CardContent>
       <Typography variant="h5" component="div">
           {title}

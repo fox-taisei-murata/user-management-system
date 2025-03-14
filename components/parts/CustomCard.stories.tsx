@@ -19,6 +19,7 @@ export const Default: StoryObj<typeof CustomCard> = {
     args: {
         title: "カードタイトル",
         description: "これはカスタムカードの説明です。",
+        bgColor: "#f5f5f5",
         actions: (
             <>
                 <CustomButton variantType="secondary">アクション1</CustomButton>
@@ -32,5 +33,19 @@ export const WithoutActions: StoryObj<typeof CustomCard> = {
     args: {
         title: "アクションなしのカード",
         description: "アクションが含まれていないカードの説明。",
+        bgColor: "#ffffff",
+    },
+};
+
+export const WithBackgroundColor: StoryObj<typeof CustomCard> = {
+    args: {
+        title: "背景色付きカード",
+        description: "カスタム背景色を設定できます。",
+        bgColor: "#ffebcd", 
+        actions: (
+            <>
+                <CustomButton variantType="success">確認</CustomButton>
+            </>
+        ),
     },
 };
