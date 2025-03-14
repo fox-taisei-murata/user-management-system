@@ -36,4 +36,23 @@ export const Danger: Story = {
     },
 };
 
-// TODO: 上記サンプルを参考に[Secondary][Danger]を設定する
+export const Success: Story = {
+    args: {
+        variantType: "success",  
+        children: "Success Button",  
+    },
+};
+
+export const Warning: Story = {
+    args: {
+        variantType: "warning",  
+        children: "Warning Button",  
+    },
+};
+
+export const Info: Story = {
+    args: {
+        variantType: "info",  
+        children: "Info Button",  
+    },
+};
