@@ -8,7 +8,13 @@ const CustomButton: React.FC<CustomButtonProps> = ({
     ...props
 }) => {
     let color: ButtonProps["color"] = "primary";
-    let customSx: SxProps = {};
+    let customSx: SxProps = {
+        transition: "transform 0.2s ease-out",
+        "&:active": {
+            transform: "scale(0.9)",
+        },
+    };
+
     switch (variantType) {
         case "secondary":
             color = "secondary";
